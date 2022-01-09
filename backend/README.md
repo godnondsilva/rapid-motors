@@ -6,4 +6,5 @@ Flask-Migrate\
 Flask-SQLAlchemy\
 Flask-Cors\
 psycopg2\
-marshmallow
+marshmallow\
+Flask-Mail
