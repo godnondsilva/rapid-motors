@@ -72,6 +72,11 @@
                       Bookings
                     </router-link>
                   </b-nav-item>
+                  <b-nav-item class="nav-flex-item">
+                    <router-link class="nav-item" :to="{ path: `/admincustomers` }">
+                      Customers
+                    </router-link>
+                  </b-nav-item>
                 </span>
 
                 <b-nav-item class="nav-flex-item">

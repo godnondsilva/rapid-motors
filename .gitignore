@@ -1,7 +1,3 @@
+# Ignores the below files/folders
 env
 __pycache__
-
-# Ignoring all the images
-*.png
-*.jpg
-*.jpeg

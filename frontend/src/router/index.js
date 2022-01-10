@@ -23,6 +23,7 @@ import AdminModifyCar from '../views/AdminModifyCar.vue'
 import AdminAddCar from '../views/AdminAddCar.vue'
 import AdminTestdrives from '../views/AdminTestdrives.vue'
 import AdminBookings from '../views/AdminBookings.vue'
+import AdminCustomers from '../views/AdminCustomers.vue'
 
 Vue.use(VueRouter);
 
@@ -112,6 +113,11 @@ const routes = [
     path: '/forgotpassword',
     name: 'ForgotPassword',
     component: ForgotPassword
+  },
+  {
+    path: '/admincustomers',
+    name: 'AdminCustomers',
+    component: AdminCustomers
   }
 ]
 

@@ -3,7 +3,7 @@ from app import app, db
 from app.common import allowed_file
 from app.models import Customer, Admin, Cars, Testdrives, Bookings
 from flask_jwt_extended import create_access_token
-from app.marsh_schema import CarsSchema, TestdrivesSchema, BookingsSchema
+from app.marsh_schema import CarsSchema, TestdrivesSchema, BookingsSchema, CustomersSchema
 from flask_mail import Message
 from app import mail
 
@@ -281,6 +281,12 @@ def bookings():
             bookingsData[index].name = carData[index].name
         print(bookingsData)
     return jsonify(BookingsSchema(many=True).dump(bookingsData))
+
+# Route to get all customers (admin)
+@app.route('/admincustomers', methods=['GET'])
+def customers():
+    customerData = Customer.query.all()
+    return jsonify(CustomersSchema(many=True).dump(customerData))
 
 # Route to request forgotten password
 @app.route('/forgotpassword', methods=['POST'])
