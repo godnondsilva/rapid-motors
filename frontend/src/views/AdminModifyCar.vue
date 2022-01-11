@@ -43,6 +43,15 @@
                             </validation-provider>
                         </div>
                         <div class="form-group">
+                            <label for="category">Category</label>
+                            <validation-provider rules="required" v-slot="{ errors }">
+                                <select id="category" v-model="localCar.category_id" :disabled="isDisabled">                             
+                                    <option v-for="(category, idx) in categories" :value="category.category_id" :key="idx">{{ category.category_id + ' - ' + category.name }}</option>
+                                </select>
+                                <div class="text-danger push-right">{{ errors[0] }}</div>
+                            </validation-provider>
+                        </div>
+                        <div class="form-group">
                             <label for="description" class="textarea-label">Description</label>
                             <validation-provider rules="required|min:3|max:255" v-slot="{ errors }">
                                 <textarea type="text" id="description" v-model="localCar.description" :disabled="isDisabled" placeholder="Enter the description of the car"></textarea>
@@ -81,7 +90,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { ValidationProvider, ValidationObserver  } from 'vee-validate';
 import axios from 'axios';
 
@@ -97,12 +106,14 @@ export default {
                 img_name: undefined,
                 year: '',
                 color: '',
+                category_id: '',
                 description: '',
             },
             dummyCar: {}, // dummyCar is used to check if the user has changed any of the fields
             isDisabled: true,
             show: false,
             hasImageChanged: false,
+            categories: [],
         }
     },
     components: {
@@ -122,10 +133,17 @@ export default {
             price: this.localCar.price,
             year: this.localCar.year,
             color: this.localCar.color,
+            category_id: this.localCar.category_id,
             description: this.localCar.description,
         }
+        this.loadCategories();
+        // Store the list of categories got from the vuex store
+        this.categories = this.getCategories();
     },
     methods: {
+        ...mapActions(['loadCategories']),
+        // Include the getCategories getter from vuex
+        ...mapGetters(['getCategories']),
         resetCar() {
             this.localCar = this.dummyCar;
             this.isDisabled = true;
@@ -148,6 +166,7 @@ export default {
                 this.localCar.price !== this.dummyCar.price ||
                 this.localCar.year !== this.dummyCar.year ||
                 this.localCar.color !== this.dummyCar.color ||
+                this.localCar.category_id !== this.dummyCar.category_id ||
                 this.localCar.description !== this.dummyCar.description ||
                 this.hasImageChanged === true
             ) {
@@ -166,6 +185,7 @@ export default {
                 formData.append('year', this.localCar.year);
                 formData.append('color', this.localCar.color);
                 formData.append('price', this.localCar.price);
+                formData.append('category_id', this.localCar.category_id);
                 formData.append('description', this.localCar.description);
                 
                 await axios.put(`http://localhost:5000/modifycar/${this.$route.params.model_id}`, formData, {
@@ -173,13 +193,6 @@ export default {
                     'Content-Type': 'multipart/form-data'
                     },
                 })
-                // .then(() => {
-                //     this.show = false;
-                //     this.isDisabled = true;
-                // })
-                // .catch(() => {
-                //     this.show = false;
-                // });
             }
             this.show = false;
             this.isDisabled = true;

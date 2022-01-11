@@ -1,9 +1,9 @@
 from flask import request, jsonify
 from app import app, db
 from app.common import allowed_file
-from app.models import Customer, Admin, Cars, Testdrives, Bookings
+from app.models import Customer, Admin, Cars, Testdrives, Bookings, Categories
 from flask_jwt_extended import create_access_token
-from app.marsh_schema import CarsSchema, TestdrivesSchema, BookingsSchema, CustomersSchema
+from app.marsh_schema import CarsSchema, TestdrivesSchema, BookingsSchema, CustomersSchema, CategoriesSchema
 from flask_mail import Message
 from app import mail
 
@@ -190,6 +190,7 @@ def addcar():
                 year=data['year'],
                 color=data['color'],
                 price=data['price'],
+                category_id=data['category_id'],
                 description=data['description'],
                 admin_id=data['admin_id']
             )
@@ -228,8 +229,9 @@ def modifycar(model_id):
                 fields = (
                     'name',
                     'year', 
-                    'color'
-                    'price', 
+                    'color',
+                    'price',
+                    'category_id',
                     'description',
                 )
                 for item in data.keys():
@@ -253,6 +255,7 @@ def modifycar(model_id):
                 'year',
                 'color', 
                 'price', 
+                'category_id',
                 'description',
             )
             for item in data.keys():
@@ -288,6 +291,12 @@ def bookings():
 def customers():
     customerData = Customer.query.all()
     return jsonify(CustomersSchema(many=True).dump(customerData))
+
+# # Route to get all categories (admin)
+@app.route('/admincategories', methods=['GET'])
+def categories():
+    categoryData = Categories.query.all()
+    return jsonify(CategoriesSchema(many=True).dump(categoryData))
 
 # Route to request forgotten password
 @app.route('/forgotpassword', methods=['POST'])

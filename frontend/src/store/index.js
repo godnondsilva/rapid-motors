@@ -10,6 +10,7 @@ export default new Vuex.Store({
     isSignedIn: false,
     user: {},
     cars: [],
+    categories: [],
     car: {},
     userType: '',
   },
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     getUserType: state => state.userType,
     getUser: state => state.user,
     getCars: state => state.cars,
+    getCategories: state => state.categories,
     getCar: state => state.car,
     getCustID: state => state.user.cust_id,
     getAdminID: state => state.user.admin_id,
@@ -42,6 +44,9 @@ export default new Vuex.Store({
     },
     setCars: (state, payload) => {
       state.cars = payload
+    },
+    setCategories: (state, payload) => {
+      state.categories = payload
     },
     routeUpdateCar: (state, payload) => {
       state.car = payload
@@ -100,6 +105,13 @@ export default new Vuex.Store({
       await axios.get('http://localhost:5000/cars')
         .then(response => {
           commit('setCars', response.data)
+        })
+    },
+
+    async loadCategories({commit}) {
+      await axios.get('http://localhost:5000/admincategories')
+        .then(response => {
+          commit('setCategories', response.data)
         })
     },
 

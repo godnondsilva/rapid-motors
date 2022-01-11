@@ -30,8 +30,8 @@
                             <div class="car-price">
                                 Price: Rs. {{ car.price }}
                             </div>
-                            <b-button @click="deleteButton(car)" class="btn btn-red right-margin">Delete</b-button>
-                            <button type="submit" @click.prevent="routeUpdate(car)" class="btn btn-yellow">Update</button>
+                            <button type="submit" @click.prevent="routeUpdate(car)" class="btn btn-yellow right-margin">Update</button>
+                            <b-button @click="deleteButton(car)" class="btn btn-red">Delete</b-button>
 
                             <b-modal v-model="show" id="modal-1" title="Confirm car deletion">
                                 <p class="my-4">Are your sure you want to delete this car?</p>

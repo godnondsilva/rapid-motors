@@ -43,6 +43,16 @@
                             </validation-provider>
                         </div>
                         <div class="form-group">
+                            <label for="category">Category</label>
+                            <validation-provider rules="required" v-slot="{ errors }">
+                                <select id="category" v-model="localCar.category_id">
+                                    <option value="" disabled>Select a category</option>
+                                    <option v-for="(category, idx) in categories" :value="category.category_id" :key="idx">{{ category.category_id + ' - ' + category.name }}</option>
+                                </select>
+                                <div class="text-danger push-right">{{ errors[0] }}</div>
+                            </validation-provider>
+                        </div>
+                        <div class="form-group">
                             <label for="description" class="textarea-label">Description</label>
                             <validation-provider rules="required|min:3|max:255" v-slot="{ errors }">
                                 <textarea type="text" id="description" v-model="localCar.description" placeholder="Enter the description of the car"></textarea>
@@ -94,10 +104,12 @@ export default {
                 price: '',
                 year: '',
                 color: '',
+                category_id: '',
                 description: '',
             },
             show: false,
             car: {},
+            categories: [],
         }
     },
     components: {
@@ -107,7 +119,13 @@ export default {
     computed: {
         ...mapGetters(['getUser', 'getAdminID']),
     },
+    mounted() {
+        // Store the list of categories got from the vuex store
+        this.categories = this.getCategories();
+    },
     methods: {
+        // Include the getCategories getter from vuex
+        ...mapGetters(['getCategories']),
         openModal(car) {
             this.show=true;
             this.car = car;
@@ -124,6 +142,7 @@ export default {
             formData.append('year', this.localCar.year);
             formData.append('color', this.localCar.color);
             formData.append('price', this.localCar.price);
+            formData.append('category_id', this.localCar.category_id);
             formData.append('description', this.localCar.description);
             formData.append('admin_id', this.getAdminID)
 
@@ -141,7 +160,7 @@ export default {
             });
             this.show = false;
         }
-    }  
+    }
 }
 </script>
 
@@ -181,6 +200,9 @@ textarea {
     border: 1px solid #eee;
     padding: 10px;
     resize: none;
+}
+select {
+    width: 400px;
 }
 .textarea-label {
     vertical-align: top;

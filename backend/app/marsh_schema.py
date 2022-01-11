@@ -2,7 +2,7 @@ from marshmallow import Schema
 
 class CarsSchema(Schema):
     class Meta:
-        fields = ('model_id', 'name', 'year', 'img_name', 'color', 'price', 'description', 'admin_id')   
+        fields = ('model_id', 'name', 'year', 'img_name', 'color', 'price', 'category_id', 'description', 'admin_id')   
         
 class TestdrivesSchema(Schema):
     class Meta:
@@ -15,3 +15,7 @@ class BookingsSchema(Schema):
 class CustomersSchema(Schema):
     class Meta:
         fields = ('cust_id', 'name', 'email', 'phone', 'address')
+
+class CategoriesSchema(Schema):
+    class Meta:
+        fields = ('category_id', 'name', 'description')

@@ -36,7 +36,7 @@ class Customer(db.Model):
 
 # Categories Table
 class Categories(db.Model):
-    __tablename__ = 'testdrives'
+    __tablename__ = 'categories'
 
     category_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), nullable=False)
@@ -58,16 +58,17 @@ class Cars(db.Model):
     color = db.Column(db.String(30), nullable=False)
     price = db.Column(db.Numeric(10, 2), nullable=False)
     description = db.Column(db.String(255), nullable=False)
-    category_id = db.column(db.Integer, db.ForeignKey('category.category_id'), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.category_id', ondelete='cascade'), nullable=False)
     admin_id = db.Column(db.Integer, db.ForeignKey('admin.admin_id'), nullable=False)
 
-    def __init__(self, name, img_name, year, color, price, description, admin_id):
+    def __init__(self, name, img_name, year, color, price, description, category_id, admin_id):
         self.name = name
         self.img_name = img_name
         self.year = year
         self.color = color
         self.price = price
         self.description = description
+        self.category_id = category_id
         self.admin_id = admin_id
 
 # Bookings Table

@@ -73,6 +73,11 @@
                     </router-link>
                   </b-nav-item>
                   <b-nav-item class="nav-flex-item">
+                    <router-link class="nav-item" :to="{ path: `/admincategories` }">
+                      Categories
+                    </router-link>
+                  </b-nav-item>
+                  <b-nav-item class="nav-flex-item">
                     <router-link class="nav-item" :to="{ path: `/admincustomers` }">
                       Customers
                     </router-link>
