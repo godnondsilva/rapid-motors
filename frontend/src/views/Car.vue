@@ -16,18 +16,30 @@
                     >
                 </div>
                 <div class="right-container">
-                    <div class="heading">
-                        Car name: {{ carData.name }}
-                    </div>
-                    <div class="subheading">
-                        Year: {{ carData.year }} |
-                        Price: {{ carData.price }} |
-                        Color: {{ carData.color }}
-                    </div>
-                    <div class="description">
-                        {{ carData.description }}
-                    </div>
-                    <b-button @click="show=true" class="btn btn-yellow">Book Now</b-button>
+                    <validation-observer v-slot="{ invalid, handleSubmit }">
+                        <form @submit.prevent="handleSubmit(bookCar)">
+                            <div class="heading">
+                                {{ carData.name }}
+                            </div>
+                            <div class="subheading">
+                                Model Year: {{ carData.year }} |
+                                Price: {{ carData.price }}
+                            </div>
+                            <div class="description">
+                                {{ carData.description }}
+                            </div>
+
+                            <validation-provider rules="required" v-slot="{ errors }">
+                                <select id="color" v-model="selectedColor">
+                                    <option value="" disabled>Select a color</option>
+                                    <option v-for="(color, idx) in carData.color" :value="color" :key="idx">{{ color }}</option>
+                                </select>
+                                <div class="text-danger push-right">{{ errors[0] }}</div>
+                            </validation-provider>
+
+                            <b-button @click="show=true" :disabled="invalid" class="push-down btn btn-yellow">Book Now</b-button>
+                        </form>
+                    </validation-observer>
 
                     <b-modal v-model="show" id="car" title="Confirm your booking">
                         <p class="my-4">Are your sure you want to book this car?</p>
@@ -56,21 +68,38 @@
 
 <script>
 import axios from 'axios';
+import { ValidationProvider, ValidationObserver  } from 'vee-validate';
 
 export default {
     name: 'Car',
     data() {
         return {
             carData: [],
-            show: false
+            show: false,
+            selectedColor: '',
         }
     },
+    components: {
+        ValidationObserver,
+        ValidationProvider,
+    },
     methods: {
+        formatColor() {
+            if(this.carData.color.search(',') !== -1) {
+                console.log('1')
+                return this.carData.color.split(', ')
+            } else {
+                console.log('2')
+                return this.carData.color.split('\n')
+            }
+        },
         async loadCar() {
             await axios.get(`http://localhost:5000/car/${this.$route.params.model_id}`)
             .then((response) => {
                 console.log(response.data)
                 this.carData = response.data
+                this.carData.color = this.formatColor()
+                console.log(this.carData.color)
             })
         },
         async bookCar(carData) {
@@ -80,6 +109,7 @@ export default {
                 model_id: carData.model_id,
                 cust_id: this.$store.state.user.cust_id,
                 booking_date: new Date(),
+                booking_color: this.selectedColor,
                 booking_price: carData.price
             }
             await axios.post(`http://localhost:5000/bookcar`, bookingData)
@@ -94,7 +124,7 @@ export default {
         }
     },
     mounted() {
-        this.loadCar()    
+        this.loadCar()
     }
 }
 </script>
@@ -146,6 +176,10 @@ export default {
     color: #000 !important;
     font-weight: 600;
 }
+.btn-yellow:disabled {
+    background-color: #666 !important;
+    color: #fff !important;
+}
 .btn-red {
     background-color: #FF918D;
     color: #000;
@@ -153,5 +187,8 @@ export default {
 .btn-red:hover {
     background-color: #FF918D;
     color: #000;
+}
+.push-down {
+    margin-top: 20px;
 }
 </style>

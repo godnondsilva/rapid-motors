@@ -10,7 +10,7 @@ class TestdrivesSchema(Schema):
 
 class BookingsSchema(Schema):
     class Meta:
-        fields = ('booking_id', 'model_id', 'cust_id', 'booking_date','booking_price', 'name')
+        fields = ('booking_id', 'model_id', 'cust_id', 'booking_color', 'booking_date','booking_price', 'name')
 
 class CustomersSchema(Schema):
     class Meta:

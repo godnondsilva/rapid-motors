@@ -131,6 +131,7 @@ def book_car():
         bookingData = Bookings(
             model_id=data['model_id'],
             cust_id=data['cust_id'],
+            booking_color=data['booking_color'],
             booking_date=data['booking_date'],
             booking_price=data['booking_price']
         )

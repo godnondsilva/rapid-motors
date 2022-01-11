@@ -2,7 +2,7 @@
 from app import app, db
 # from sqlalchemy.orm import relationship
 
-# Admin schema
+# Admin Table
 class Admin(db.Model):
     __tablename__ = 'admin'
 
@@ -16,7 +16,7 @@ class Admin(db.Model):
         self.password = password
         self.name = name
 
-# Customer schema
+# Customer Table
 class Customer(db.Model):
     __tablename__ = 'customer'
 
@@ -34,7 +34,20 @@ class Customer(db.Model):
         self.address = address
         self.phone = phone
 
-# Cars schema
+# Categories Table
+class Categories(db.Model):
+    __tablename__ = 'testdrives'
+
+    category_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20), nullable=False)
+    description = db.Column(db.String(255), nullable=False)
+        
+    def __init__(self, cust_id, name, description):
+        self.cust_id = cust_id
+        self.name = name
+        self.description = description
+
+# Cars Table
 class Cars(db.Model):
     __tablename__ = 'cars'
 
@@ -42,9 +55,10 @@ class Cars(db.Model):
     name = db.Column(db.String(30), nullable=False)
     img_name = db.Column(db.String(50), nullable=False)
     year = db.Column(db.Numeric(4), nullable=False)
-    color = db.Column(db.String(20), nullable=False)
+    color = db.Column(db.String(30), nullable=False)
     price = db.Column(db.Numeric(10, 2), nullable=False)
     description = db.Column(db.String(255), nullable=False)
+    category_id = db.column(db.Integer, db.ForeignKey('category.category_id'), nullable=False)
     admin_id = db.Column(db.Integer, db.ForeignKey('admin.admin_id'), nullable=False)
 
     def __init__(self, name, img_name, year, color, price, description, admin_id):
@@ -56,23 +70,25 @@ class Cars(db.Model):
         self.description = description
         self.admin_id = admin_id
 
-# Class Bookings
+# Bookings Table
 class Bookings(db.Model):
     __tablename__ = 'bookings'
 
     booking_id = db.Column(db.Integer, primary_key=True)
     model_id = db.Column(db.Integer, db.ForeignKey('cars.model_id', ondelete='cascade'), nullable=False)
     cust_id = db.Column(db.Integer, db.ForeignKey('customer.cust_id', ondelete='cascade'), nullable=False)
+    booking_color = db.Column(db.String(20), nullable=False)
     booking_date = db.Column(db.Date, nullable=False)
     booking_price = db.Column(db.Numeric(10, 2), nullable=False)
 
-    def __init__(self, model_id, cust_id, booking_date, booking_price):
+    def __init__(self, model_id, cust_id, booking_color, booking_date, booking_price):
         self.model_id = model_id
         self.cust_id = cust_id
+        self.booking_color = booking_color
         self.booking_date = booking_date
         self.booking_price = booking_price
 
-# Class Testdrives
+# Testdrives Table
 class Testdrives(db.Model):
     __tablename__ = 'testdrives'
 

@@ -36,6 +36,11 @@ export default {
                     class: 'text-center',
                 },
                 {
+                    key: 'booking_color',
+                    label: 'Color',
+                    class: 'text-center',
+                },
+                {
                     key: 'booking_price',
                     label: 'Booking Price',
                     class: 'text-center',
