@@ -12,6 +12,7 @@ export default new Vuex.Store({
     cars: [],
     categories: [],
     car: {},
+    category: {},
     userType: '',
   },
   getters: {
@@ -20,6 +21,7 @@ export default new Vuex.Store({
     getUser: state => state.user,
     getCars: state => state.cars,
     getCategories: state => state.categories,
+    getCategory: state => state.category,
     getCar: state => state.car,
     getCustID: state => state.user.cust_id,
     getAdminID: state => state.user.admin_id,
@@ -50,6 +52,9 @@ export default new Vuex.Store({
     },
     routeUpdateCar: (state, payload) => {
       state.car = payload
+    },
+    routeModifyCategory: (state, payload) => {
+      state.category = payload
     },
   },
   actions: {
@@ -133,6 +138,10 @@ export default new Vuex.Store({
 
     routeUpdateCar({commit}, payload) {
       commit('routeUpdateCar', payload)
-    }
+    },
+
+    routeModifyCategory({commit}, payload) {
+      commit('routeModifyCategory', payload)
+    },
   },
 })

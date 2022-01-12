@@ -25,6 +25,8 @@ import AdminTestdrives from '../views/AdminTestdrives.vue'
 import AdminBookings from '../views/AdminBookings.vue'
 import AdminCategories from '../views/AdminCategories.vue'
 import AdminCustomers from '../views/AdminCustomers.vue'
+import AdminAddCategory from '../views/AdminAddCategory.vue'
+import AdminModifyCategory from '../views/AdminModifyCategory.vue'
 
 Vue.use(VueRouter);
 
@@ -116,14 +118,25 @@ const routes = [
     component: AdminBookings
   },
   {
+    path: '/admincustomers',
+    name: 'AdminCustomers',
+    component: AdminCustomers
+  },
+  {
     path: '/admincategories',
     name: 'AdminCategories',
     component: AdminCategories
   },
   {
-    path: '/admincustomers',
-    name: 'AdminCustomers',
-    component: AdminCustomers
+    path: '/adminaddcategory',
+    name: 'AdminAddCategory',
+    component: AdminAddCategory
+  }
+  ,
+  {
+    path: '/adminmodifycategory/:category_id',
+    name: 'AdminModifyCategory',
+    component: AdminModifyCategory
   }
 ]
 

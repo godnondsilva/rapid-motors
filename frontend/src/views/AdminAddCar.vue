@@ -120,6 +120,10 @@ export default {
         ...mapGetters(['getUser', 'getAdminID']),
     },
     mounted() {
+        if (this.getCategories().length === 0) {
+            alert('No categories found. Please add a category first.');
+            this.$router.push('/admincategories');
+        }
         // Store the list of categories got from the vuex store
         this.categories = this.getCategories();
     },

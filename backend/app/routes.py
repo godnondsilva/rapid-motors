@@ -55,10 +55,12 @@ def login():
         password = request.json.get('password', None)
 
         if not email or not password:
-           return {"error": "Missing username or password"}
+           return {"error": "Missing email or password"}
         
         userData = Customer.query.filter_by(email=email).first()
         if userData is None:
+            return {"error": "That user does not exist"}
+        if userData.password != password:
             return {"error": "Invalid credentials"}
         else:
             access_token = create_access_token(identity={"email": email})
@@ -82,10 +84,12 @@ def loginAdmin():
         password = request.json.get('password', None)
 
         if not email or not password:
-           return {"error": "Missing username or password"}
+           return {"error": "Missing email or password"}
         
         adminData = Admin.query.filter_by(email=email).first()
         if adminData is None:
+            return {"error": "That admin does not exist"}
+        if adminData.password != password:
             return {"error": "Invalid credentials"}
         else:
             access_token = create_access_token(identity={"email": email})
@@ -99,6 +103,7 @@ def cars():
     cars = Cars.query.all()
     return jsonify(CarsSchema(many=True).dump(cars))
 
+# Route to get a specific car from the database
 @app.route('/car/<int:model_id>', methods=['GET'])
 def car(model_id):
     carData = Cars.query.filter_by(model_id=model_id).first()
@@ -152,19 +157,27 @@ def testdrive(cust_id):
 # Route to get all bookings for particular customer id
 @app.route('/bookings/<int:cust_id>', methods=['GET'])
 def booking(cust_id):
-    bookingsData=Bookings.query.filter_by(cust_id=cust_id).all()
-    carData=[]
-    for element in bookingsData:
-        carData.append(Cars.query.filter_by(model_id=element.model_id).first())
-    for index in range(len(carData)):
-        if carData[index].model_id == bookingsData[index].model_id:
-            bookingsData[index].name = carData[index].name
-    print()
-    
+    bookingsData = db.session.query(Bookings.booking_id, Bookings.model_id, Bookings.cust_id, Bookings.booking_color, Bookings.booking_date, Bookings.booking_price, Cars.name).filter(Bookings.model_id == Cars.model_id).filter(Bookings.cust_id == cust_id).all()
+    # print(bookingsData)
     return jsonify(BookingsSchema(many=True).dump(bookingsData))
 
 
 # Admin routes
+# Route to add categories
+@app.route('/addcategory', methods=['POST'])
+def add_category():
+    if request.is_json:
+        data = request.get_json()
+        categoryData = Categories(
+            name=data['name'],
+            description=data['description']
+        )
+        db.session.add(categoryData)
+        db.session.commit()
+        return {"message": "Category succesfully added"}
+    else:
+        return {"error": "The request payload is not in JSON format"}
+
 # Route to add cars
 # Note: This route uses FORM data and not JSON data
 @app.route('/addcar', methods=['POST'])
@@ -200,6 +213,18 @@ def addcar():
         else:
             return {"error": "The file is not in the allowed format"}
 
+# Route to delete a category (admin)
+@app.route('/deletecategory/<int:category_id>', methods=['DELETE'])
+def delete_category(category_id):
+    category = db.session.query(Categories).filter_by(category_id=category_id)
+    if category:
+        category.delete()
+        db.session.commit()
+        return {"message": "Category successfully deleted"}
+    else:
+        return {"error": "Category not found"}
+
+# Route to delete a car (admin)
 @app.route('/deletecar/<int:model_id>', methods=['DELETE'])
 def deletecar(model_id):
     car = db.session.query(Cars).filter_by(model_id=model_id)
@@ -209,6 +234,30 @@ def deletecar(model_id):
         return {"message": "Car successfully deleted"}
     else:
         return {"error": "Car not found"}
+
+# Route to modify a category (admin)
+@app.route('/modifycategory/<int:category_id>', methods=['PUT'])
+def modify_category(category_id):
+    if request.is_json:
+        if category_id:
+            data = request.get_json()
+            fields = (
+                'name',
+                'description', 
+            )
+            for item in data.keys():
+                if item in fields:
+                    print(data[item])
+                    db.session.query(Categories).filter_by(category_id=category_id).update(
+                    {
+                        item: data[item]
+                    })
+            db.session.commit()
+            return {"message": "Category successfully modified"}
+        else:
+            return {"error": "Category not found"}
+    else:
+        return {"error": "The request payload is not in JSON format"}
 
 # Route to modify the car details
 @app.route('/modifycar/<int:model_id>', methods=['PUT'])
@@ -297,6 +346,9 @@ def customers():
 def categories():
     categoryData = Categories.query.all()
     return jsonify(CategoriesSchema(many=True).dump(categoryData))
+
+
+
 
 # Route to request forgotten password
 @app.route('/forgotpassword', methods=['POST'])

@@ -42,8 +42,7 @@ class Categories(db.Model):
     name = db.Column(db.String(20), nullable=False)
     description = db.Column(db.String(255), nullable=False)
         
-    def __init__(self, cust_id, name, description):
-        self.cust_id = cust_id
+    def __init__(self, name, description):
         self.name = name
         self.description = description
 

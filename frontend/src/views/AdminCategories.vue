@@ -9,19 +9,39 @@
             </button>
             <b-table class="border-top" striped :items="items" :fields="fields">
                 <template #cell(actions)="row">
-                    <b-button class="button btn btn-yellow" size="sm" @click="info(row.item, row.index, $event.target)">
+                    <b-button class="button btn btn-yellow" size="sm" @click="routeUpdateCategory(row.item)">
                         Modify
                     </b-button>
-                    <b-button class="btn btn-red" size="sm" @click="row.toggleDetails">
+                    <b-button class="btn btn-red" size="sm" @click="showDeletionModal(row.item.category_id)">
                         Delete
                     </b-button>
                 </template>
             </b-table>
+            <b-modal v-model="show" id="delete-category" title="Confirm category deletion">
+                <p class="my-4">Are your sure you want to delete this category?</p>
+                <template #modal-footer>
+                    <b-button
+                        size="md"
+                        class="float-right btn btn-red"
+                        @click="show=false"
+                    >
+                        Cancel
+                    </b-button>
+                    <b-button
+                        size="md"
+                        class="float-right btn btn-yellow"
+                        @click="deleteCategory()"
+                    >
+                        Delete Category
+                    </b-button>
+                </template>
+            </b-modal>
         </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -50,16 +70,43 @@ export default {
                     class: 'text-center'
                 },
             ],
-            items: []
+            items: [],
+            show: false,
+            selectedCategory: '',
         }
     },
     methods: {
-        ...mapActions(['loadCategories']),
+        ...mapActions(['loadCategories', 'routeModifyCategory']),
         ...mapGetters(['getCategories']),
+        showDeletionModal(category_id) {
+            this.show = true;
+
+            this.selectedCategory = category_id;
+            console.log(this.selectedCategory);
+        },
+        routeUpdateCategory(categoryData) {
+            // const categoryData = {...categoryArray}
+            this.routeModifyCategory(categoryData);
+            this.$router.push(`/adminmodifycategory/${categoryData.category_id}`);
+        },
+        async deleteCategory() {
+            await axios.delete(`http://localhost:5000/deletecategory/${this.selectedCategory}`)
+            .then(() => {
+                alert('Category deleted successfully!')
+            })
+            .catch(() => {
+                alert('Error deleting category!')
+            })
+            this.show = false;
+            await this.reloadCategories()
+        },
+        async reloadCategories() {
+            await this.loadCategories()   
+            this.items = await this.getCategories()
+        }
     },
-    mounted() {
-        this.loadCategories()   
-        this.items = this.getCategories()
+    async mounted() {
+        await this.reloadCategories()
     }
 }
 </script>
