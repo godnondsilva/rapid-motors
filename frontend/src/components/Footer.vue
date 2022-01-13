@@ -4,7 +4,10 @@
             <div class="upper-container">
                 <div class="left-container">
                     <div class="heading">Volt Motors</div>
-                    <div class="text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eveniet molestiae placeat error exercitationem impedit accusamus dignissimos?</div>
+                    <div class="text">
+                        We at Volt Motors strive to provide the best service to our customers.
+                        We hope you will enjoy our services. We are glad to serve you.
+                    </div>
                 </div>
                 <div class="right-container">
                     <div class="heading">Contact Us</div>

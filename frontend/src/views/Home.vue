@@ -5,8 +5,8 @@
       <div class="banner-text">
         <div class="heading">Welcome to Volt Motors!</div>
         <div class="text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-          tempor incididunt ut labore et dolore magna 
+          Looking to purchase a new car? Look no furthur! Here at volt motors, 
+          we have a wide variety of cars to choose from.
         </div>
         <div class='button'>
           <router-link class="button-text" to="/cars">Book now!</router-link>
@@ -21,17 +21,17 @@
           <div class="service">
             <img src="../assets/home-icons/check-icon.png" alt="check-icon"/>
             <div class="service-heading">Quality Assurance</div>
-            <div class="service-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </div>
+            <div class="service-text">We provide the best in class quality and service to all our customers</div>
           </div>
           <div class="service">
             <img src="../assets/home-icons/car-icon.png" alt="car-icon"/>
             <div class="service-heading">Test Drives</div>
-            <div class="service-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </div>
+            <div class="service-text">We provide testdrives for our cars so that you can get first hand experience of the vehicle before booking it.</div>
           </div>
           <div class="service">
             <img src="../assets/home-icons/bolt-icon.png" alt="bolt-icon"/>
             <div class="service-heading">Quick Delivery</div>
-            <div class="service-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </div>
+            <div class="service-text">We provide a fast handover experience and delivery of the car to your home.</div>
           </div>
         </div>
       </div>
@@ -41,14 +41,11 @@
       <div class="container">
         <div class="section-heading">Who are we?</div>
         <div class="section-text">
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-            sed do eiusmod tempor incididunt ut labore et dolore magna 
-            aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-            ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-            Duis aute irure dolor in reprehenderit in voluptate velit 
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-            occaecat cupidatat non proident, sunt in culpa qui officia 
-            deserunt mollit anim id est laborum."
+            We at Volt Motors aim to provide a hassle free experience for our customers. 
+            We provide the best in class quality and service for you. You can book a testdrive from our
+            online portal. You can also direct book the vehicle based on your favorite category.
+            We provide a fast handover experience and delivery of the car to your home.
+            Volt Motors is a one stop shop for all your car needs.
         </div>
       </div>
     </div>

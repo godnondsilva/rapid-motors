@@ -12,24 +12,21 @@
             <div class="container">
                 <div class="section-heading">About Us</div>
                 <p class="section-text">
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna 
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                    Duis aute irure dolor in reprehenderit in voluptate velit 
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-                    occaecat cupidatat non proident, sunt in culpa qui officia 
-                    deserunt mollit anim id est laborum."
+                  We at volt motors strive to provide the best service 
+                    to our customers. We hope you will enjoy our services. 
+                    We provide testdrive for our cars so that you can get first hand
+                    experience of the vehicle before booking it. We provide a fast
+                    handover experience and delivery of the car to your home.
                 </p>
                 <p class="section-text">
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna 
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                    Duis aute irure dolor in reprehenderit in voluptate velit 
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-                    occaecat cupidatat non proident, sunt in culpa qui officia 
-                    deserunt mollit anim id est laborum."
+                    Volt Motors was created as a part of the DBMS Mini Project 
+                    for the course of Database Management System. It is a
+                    Car Showroom Management System. It is a web based system
+                    which is used to manage the car showroom. It allows the user
+                    to book testdrives as well as book cars. It also allows the 
+                    user to view the car details and the car images. You can also
+                    manage your profile and view your bookings, including your testdrive
+                    bookings.
                 </p>
             </div>
         </div>
