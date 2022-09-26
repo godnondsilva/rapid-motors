@@ -3,9 +3,9 @@
 		<div class="container inner-footer">
 			<div class="upper-container">
 				<div class="left-container">
-					<div class="heading">Volt Motors</div>
+					<div class="heading">Rapid Motors</div>
 					<div class="text">
-						We at Volt Motors strive to provide the best service to our
+						We at Rapid Motors strive to provide the best service to our
 						customers. We hope you will enjoy our services. We are glad to serve
 						you.
 					</div>
@@ -23,7 +23,7 @@
 					</a>
 				</div>
 			</div>
-			<div class="lower-container">Volt Motors | Copyright Ⓒ 2021</div>
+			<div class="lower-container">Rapid Motors | Copyright Ⓒ 2021</div>
 		</div>
 	</div>
 </template>
@@ -35,18 +35,22 @@
 	.upper-container {
 		display: block !important;
 	}
+
 	.left-container,
 	.right-container {
 		width: 200px !important;
 		padding: 1em 0 !important;
 	}
+
 	.lower-container {
 		padding-bottom: 30px;
 	}
+
 	.text {
 		width: 200px;
 	}
 }
+
 .footer {
 	width: 100%;
 	min-height: 29vh;
@@ -54,35 +58,44 @@
 	color: #fff;
 	padding-top: 3em;
 }
+
 .inner-footer {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
+
 .upper-container {
 	display: flex;
 }
+
 .heading {
 	font-size: 24px;
 	font-weight: 600;
 	padding-bottom: 10px;
 }
+
 .left-container,
 .right-container {
 	width: 600px;
 }
+
 .left-container {
 	padding-right: 100px;
 }
+
 .right-container {
 	padding-left: 100px;
 }
+
 .text {
 	width: 400px;
 }
+
 .lower-container {
 	padding-top: 60px;
 }
+
 .social {
 	padding-right: 8px;
 }

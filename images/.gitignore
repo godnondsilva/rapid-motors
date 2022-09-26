@@ -1,6 +1,0 @@
-# This file is required to keep this folder empty
-# This folder is required to store the images uploaded by the user on the backend
-
-# Ignores all the files in the folder, except the .gitignore file
-*
-!.gitignore

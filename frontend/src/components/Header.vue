@@ -3,8 +3,10 @@
 		<b-navbar toggleable="xl" class="header">
 			<b-navbar-brand>
 				<router-link class="nav-heading" :to="{ path: '/' }">
-					<img class="logo" src="../assets/logo.png" />
-					Volt Motors
+					<div class="d-flex align-items-center">
+						<img class="logo" src="../assets/logo.png" />
+						Rapid Motors
+					</div>
 				</router-link>
 			</b-navbar-brand>
 
@@ -33,31 +35,22 @@
 							<span v-if="getSignedInState" style="display: flex">
 								<span v-if="getUserType === 'customer'" style="display: flex">
 									<b-nav-item class="nav-flex-item">
-										<router-link
-											class="nav-item"
-											:to="{ path: '/booktestdrive' }"
-										>
+										<router-link class="nav-item" :to="{ path: '/booktestdrive' }">
 											Book Testdrive
 										</router-link>
 									</b-nav-item>
 
 									<b-nav-item class="nav-flex-item">
-										<router-link
-											class="nav-item"
-											:to="{
-												path: `/testdrives/${getCustID}`,
-											}"
-										>
+										<router-link class="nav-item" :to="{
+											path: `/testdrives/${getCustID}`,
+										}">
 											Testdrives
 										</router-link>
 									</b-nav-item>
 									<b-nav-item class="nav-flex-item">
-										<router-link
-											class="nav-item"
-											:to="{
-												path: `/bookings/${getCustID}`,
-											}"
-										>
+										<router-link class="nav-item" :to="{
+											path: `/bookings/${getCustID}`,
+										}">
 											Bookings
 										</router-link>
 									</b-nav-item>
@@ -76,34 +69,22 @@
 									</b-nav-item>
 
 									<b-nav-item class="nav-flex-item">
-										<router-link
-											class="nav-item"
-											:to="{ path: `/admintestdrives` }"
-										>
+										<router-link class="nav-item" :to="{ path: `/admintestdrives` }">
 											Testdrives
 										</router-link>
 									</b-nav-item>
 									<b-nav-item class="nav-flex-item">
-										<router-link
-											class="nav-item"
-											:to="{ path: `/adminbookings` }"
-										>
+										<router-link class="nav-item" :to="{ path: `/adminbookings` }">
 											Bookings
 										</router-link>
 									</b-nav-item>
 									<b-nav-item class="nav-flex-item">
-										<router-link
-											class="nav-item"
-											:to="{ path: `/admincategories` }"
-										>
+										<router-link class="nav-item" :to="{ path: `/admincategories` }">
 											Categories
 										</router-link>
 									</b-nav-item>
 									<b-nav-item class="nav-flex-item">
-										<router-link
-											class="nav-item"
-											:to="{ path: `/admincustomers` }"
-										>
+										<router-link class="nav-item" :to="{ path: `/admincustomers` }">
 											Customers
 										</router-link>
 									</b-nav-item>
@@ -151,25 +132,30 @@ export default {
 
 <style scoped>
 .logo {
-	width: 50px;
-	height: 50px;
-	transform: scale(1.4);
+	width: 40px;
+	height: 35px;
+	margin-right: 10px;
+	margin-top: 3px;
 }
+
 @media (min-width: 768px) {
 	.header {
 		padding: 1rem 16rem;
 	}
 }
+
 @media (max-width: 767px) {
 	.header {
 		padding: 1rem 2rem;
 	}
 }
+
 @media (max-width: 600px) {
 	.d-flex {
 		display: block !important;
 	}
 }
+
 .nav-heading {
 	color: #000 !important;
 	text-decoration: none !important;
@@ -179,6 +165,7 @@ export default {
 	font-weight: 600;
 	font-size: 20px;
 }
+
 .nav-item {
 	padding: 0 4px !important;
 	font-size: 18px;
@@ -186,6 +173,7 @@ export default {
 	font-weight: 600;
 	text-decoration: none !important;
 }
+
 .logout {
 	color: #000;
 }

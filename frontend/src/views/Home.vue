@@ -3,9 +3,9 @@
 		<div class="banner-container">
 			<img class="banner" src="../assets/home-banner.png" alt="home-banner" />
 			<div class="banner-text">
-				<div class="heading">Welcome to Volt Motors!</div>
+				<div class="heading">Welcome to Rapid Motors!</div>
 				<div class="text">
-					Looking to purchase a new car? Look no furthur! Here at volt motors,
+					Looking to purchase a new car? Look no furthur! Here at rapid motors,
 					we have a wide variety of cars to choose from.
 				</div>
 				<div class="button">
@@ -50,11 +50,11 @@
 			<div class="container">
 				<div class="section-heading">Who are we?</div>
 				<div class="section-text">
-					We at Volt Motors aim to provide a hassle free experience for our
+					We at Rapid Motors aim to provide a hassle free experience for our
 					customers. We provide the best in class quality and service for you.
 					You can book a testdrive from our online portal. You can also direct
 					book the vehicle based on your favorite category. We provide a fast
-					handover experience and delivery of the car to your home. Volt Motors
+					handover experience and delivery of the car to your home. Rapid Motors
 					is a one stop shop for all your car needs.
 				</div>
 			</div>
@@ -72,20 +72,24 @@ export default {
 .banner-container {
 	position: relative;
 }
+
 .banner {
 	width: 100%;
 }
+
 .banner-text {
 	position: absolute;
 	top: 26%;
 	left: 20%;
 	width: 600px;
 }
+
 .heading {
 	font-size: 3rem;
 	font-weight: bold;
 	color: #fff;
 }
+
 .button {
 	background-color: #e4c314;
 	width: 120px;
@@ -95,9 +99,11 @@ export default {
 	align-items: center;
 	justify-content: center;
 }
+
 .button:hover {
 	cursor: pointer;
 }
+
 .text {
 	width: 400px;
 	font-size: 1.1rem;
@@ -115,11 +121,13 @@ export default {
 	background-color: #f5f5f5;
 	padding: 60px 0 80px 0;
 }
+
 .services {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
 }
+
 .service {
 	width: 280px;
 	height: 300px;
@@ -131,6 +139,7 @@ export default {
 	align-items: center;
 	flex-direction: column;
 }
+
 .service-heading {
 	font-size: 1.25rem;
 	font-weight: bold;
@@ -138,6 +147,7 @@ export default {
 	padding-top: 20px;
 	padding-bottom: 10px;
 }
+
 .service-text {
 	color: #000;
 }
@@ -146,6 +156,7 @@ export default {
 	padding: 80px 0;
 	text-align: center;
 }
+
 .section-heading {
 	font-size: 2.2rem;
 	font-weight: bold;
@@ -153,6 +164,7 @@ export default {
 	padding-bottom: 30px;
 	text-align: center;
 }
+
 .section-text {
 	font-size: 1.1rem;
 	color: #000;

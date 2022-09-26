@@ -6,6 +6,7 @@ from flask_jwt_extended import create_access_token
 from app.marsh_schema import CarsSchema, TestdrivesSchema, BookingsSchema, CustomersSchema, CategoriesSchema
 from flask_mail import Message
 from app import mail
+import os
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -361,9 +362,9 @@ def forgotpassword():
             password = Customer.query.filter_by(email=email).first().password
             msg = Message(
                 'Password Recovery',
-                sender ='noreply.voltmotors@gmail.com',
+                sender = os.getenv('GMAIL_USERNAME'),
                 recipients = [email],
-                body = "You recently requested for your password through Volt Motors Online Portal\nIf this wasn't you, please get in touch with us as soon as possible.\n\n\n Your Password is: " + password
+                body = "You recently requested for your password through Rapid Motors Online Portal\nIf this wasn't you, please get in touch with us as soon as possible.\n\n\n Your Password is: " + password
             )
             mail.send(msg)
             print("Email has been sent!")

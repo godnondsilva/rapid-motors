@@ -1,2 +1,3 @@
-# Volt Motors
-A Car Showroom Management System (DBMS Mini Project)
+# Rapid Motors
+
+A car showroom management system using Vue.js and Flask
